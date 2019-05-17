@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "./App.css";
+import Books from "./components/books";
+import Details from "./components/details";
+import Character from "./components/character";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const mapStateToProps = state => ({
+  ...state
+});
 
-export default App;
+const App = () => (
+  <Router>
+    <Route exact path="/" component={Books} />
+    <Route path="/details/:isbn" component={Details} />
+    <Route path="/characters/:id" component={Character} />
+  </Router>
+);
+
+export default connect(mapStateToProps)(App);
